@@ -18,4 +18,38 @@ class RecipeController extends Controller
         $recipes = Recipe::all();
         return view('recipes.index', ['recipes' => $recipes]);
     }
+
+    public function show()
+    {
+
+    }
+
+    public function create()
+    {
+        return view('recipes.create');
+    }
+
+    public function edit()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function destroy()
+    {
+
+    }
+
+    public function store()
+    {
+        $recipe = new Recipe();
+        $recipe->title = request('title');
+        $recipe->description = request('description');
+        $recipe->save();
+        return redirect('recipes');
+    }
 }

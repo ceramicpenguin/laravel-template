@@ -15,4 +15,13 @@ Route::get('/', 'PageController@home');
 Route::get('/about', 'PageController@about');
 Route::get('/contact', 'PageController@contact');
 
-Route::get('/recipes', 'RecipeController@index');
+/*
+ * GET /recipes (index)
+ * GET /recipes/create (create)
+ * GET /recipes/1 (show)
+ * POST /recipes (store)
+ * GET /recipes/1/edit (edit)
+ * PATCH /recipes/1 (update)
+ * DELETE /recipes/1 (destroy)
+ */
+Route::resource('recipes', 'RecipeController');
