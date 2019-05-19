@@ -81,5 +81,5 @@ task('deploy', [
     'docker:up',
     'composer:install',
     'files:chown-directories',
-    'artisan:generate-ide-helper'
+    'artisan:ide-helper:generate'
 ]);
