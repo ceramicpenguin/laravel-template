@@ -64,13 +64,37 @@ task('artisan:key:generate', function () {
 
         run(
             sprintf(
-                'cd %s && bin/artisan ',
+                'cd %s && bin/artisan key:generate',
                 get('deploy_path')
             )
         );
         writeln('<info>Application key generated</info>');
 
 });
+
+task('artisan:migrate', function () {
+
+        run(
+            sprintf(
+                'cd %s && bin/artisan migrate',
+                get('deploy_path')
+            )
+        );
+        writeln('<info>DB Migrated</info>');
+
+});
+
+task('artisan:migrate:fresh', function () {
+
+        run(
+            sprintf(
+                'cd %s && bin/artisan migrate:fresh',
+                get('deploy_path')
+            )
+        );
+        writeln('<info>DB Migrated</info>');
+
+})->onStage('dev');
 
 localhost('dev')
     ->stage('dev')
@@ -81,5 +105,6 @@ task('deploy', [
     'docker:up',
     'composer:install',
     'files:chown-directories',
+    'artisan:migrate',
     'artisan:ide-helper:generate'
 ]);
