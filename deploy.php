@@ -12,7 +12,7 @@ task('docker:up', function () {
     run(sprintf('cd %s && docker-compose up -d', get('deploy_path')));
 });
 
-task('chown-directories', function () {
+task('files:chown-directories', function () {
 
     $directories = get('directories_to_chown');
 
@@ -37,6 +37,29 @@ task('chown-directories', function () {
 
 });
 
+task('composer:install', function () {
+
+        run(
+            sprintf(
+                'cd %s && docker-compose exec -T php composer install',
+                get('deploy_path')
+            )
+        );
+
+});
+
+task('artisan:generate-ide-helper', function () {
+
+        run(
+            sprintf(
+                'cd %s && docker-compose exec -T php php artisan ide-helper:generate',
+                get('deploy_path')
+            )
+        );
+        writeln('<info>IDE helper file generated</info>');
+
+});
+
 localhost('dev')
     ->stage('dev')
     ->set('deploy_path', __DIR__)
@@ -44,5 +67,7 @@ localhost('dev')
 
 task('deploy', [
     'docker:up',
-    'chown-directories',
+    'composer:install',
+    'files:chown-directories',
+    'artisan:generate-ide-helper'
 ]);
