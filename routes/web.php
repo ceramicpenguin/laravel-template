@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', 'PagesController@home');
-Route::get('/about', 'PagesController@about');
-Route::get('/contact', 'PagesController@contact');
+Route::get('/', 'PageController@home');
+Route::get('/about', 'PageController@about');
+Route::get('/contact', 'PageController@contact');
+
+Route::get('/recipes', 'RecipeController@index');
