@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+args=$@
+docker-compose run --rm -T php sh -c "php artisan $args"

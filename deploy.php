@@ -48,15 +48,27 @@ task('composer:install', function () {
 
 });
 
-task('artisan:generate-ide-helper', function () {
+task('artisan:ide-helper:generate', function () {
 
         run(
             sprintf(
-                'cd %s && docker-compose exec -T php php artisan ide-helper:generate',
+                'cd %s && bin/artisan ide-helper:generate',
                 get('deploy_path')
             )
         );
         writeln('<info>IDE helper file generated</info>');
+
+});
+
+task('artisan:key:generate', function () {
+
+        run(
+            sprintf(
+                'cd %s && bin/artisan ',
+                get('deploy_path')
+            )
+        );
+        writeln('<info>Application key generated</info>');
 
 });
 
